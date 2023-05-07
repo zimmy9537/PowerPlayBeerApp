@@ -11,25 +11,25 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.powerplay.zimmy.powerplaybeerapp.databinding.ItemBeerListBinding
-import com.powerplay.zimmy.powerplaybeerapp.model.RepositoriesModelItem
+import com.powerplay.zimmy.powerplaybeerapp.model.BeerModelItem
 
 
 class BeerListAdapter(
     private val context: Context?,
     private val listener: BeerActionListener
 ) :
-    ListAdapter<RepositoriesModelItem, RecyclerView.ViewHolder>(
-        object : DiffUtil.ItemCallback<RepositoriesModelItem>() {
+    ListAdapter<BeerModelItem, RecyclerView.ViewHolder>(
+        object : DiffUtil.ItemCallback<BeerModelItem>() {
             override fun areItemsTheSame(
-                oldItem: RepositoriesModelItem,
-                newItem: RepositoriesModelItem
+                oldItem: BeerModelItem,
+                newItem: BeerModelItem
             ): Boolean {
                 return newItem.id == oldItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: RepositoriesModelItem,
-                newItem: RepositoriesModelItem
+                oldItem: BeerModelItem,
+                newItem: BeerModelItem
             ): Boolean {
                 return newItem == oldItem
             }
@@ -38,7 +38,7 @@ class BeerListAdapter(
 
     inner class BeerItemViewHolder(private val binding: ItemBeerListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(beer: RepositoriesModelItem) {
+        fun bind(beer: BeerModelItem) {
             with(binding) {
                 val message =
                     "Beer name: ${beer.name}\n\nTagline: ${beer.tagline}\n\nDescription: ${beer.description}"

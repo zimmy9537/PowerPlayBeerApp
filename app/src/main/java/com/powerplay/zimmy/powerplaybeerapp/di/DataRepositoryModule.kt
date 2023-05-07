@@ -1,7 +1,7 @@
 package com.powerplay.zimmy.powerplaybeerapp.di
 
-import com.powerplay.zimmy.powerplaybeerapp.network.ApiService
-import com.powerplay.zimmy.powerplaybeerapp.repository.DataRepository
+import com.powerplay.zimmy.powerplaybeerapp.network.BeerApiService
+import com.powerplay.zimmy.powerplaybeerapp.repository.BeerRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,7 +12,7 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 object DataRepositoryModule {
 
     @Provides
-    fun provideDataRepository(apiService: ApiService): DataRepository {
-        return DataRepository(apiService)
+    fun provideDataRepository(beerApiService: BeerApiService): BeerRepository {
+        return BeerRepository(beerApiService)
     }
 }

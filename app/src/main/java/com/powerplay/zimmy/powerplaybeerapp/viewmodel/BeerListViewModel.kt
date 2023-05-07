@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.powerplay.zimmy.powerplaybeerapp.model.RepositoriesModel
-import com.powerplay.zimmy.powerplaybeerapp.model.RepositoriesModelItem
+import com.powerplay.zimmy.powerplaybeerapp.model.BeerModel
+import com.powerplay.zimmy.powerplaybeerapp.model.BeerModelItem
 import com.powerplay.zimmy.powerplaybeerapp.network.ResultData
 import com.powerplay.zimmy.powerplaybeerapp.usecase.DataUseCase
 import com.powerplay.zimmy.powerplaybeerapp.util.ListNotifier
@@ -19,13 +19,13 @@ import javax.inject.Inject
 @HiltViewModel
 class BeerListViewModel @Inject constructor(private val useCase: DataUseCase) : ViewModel() {
 
-    private val _beerModelLiveData: MutableLiveData<ResultData<RepositoriesModel>> =
+    private val _beerModelLiveData: MutableLiveData<ResultData<BeerModel>> =
         MutableLiveData()
-    val beerModelLiveData: LiveData<ResultData<RepositoriesModel>>
+    val beerModelLiveData: LiveData<ResultData<BeerModel>>
         get() = _beerModelLiveData
 
-    private val _beerList = arrayListOf<RepositoriesModelItem>()
-    val beerList: List<RepositoriesModelItem> get() = _beerList
+    private val _beerList = arrayListOf<BeerModelItem>()
+    val beerList: List<BeerModelItem> get() = _beerList
 
     val isLastPage = AtomicBoolean(false)
     val isLoading = AtomicBoolean(false)
@@ -50,7 +50,7 @@ class BeerListViewModel @Inject constructor(private val useCase: DataUseCase) : 
             )
         }
         viewModelScope.launch {
-            useCase.getRepositoriesList(page, per_page)
+            useCase.getBeerList(page, per_page)
                 .onEach { result ->
                     when (result) {
                         is ResultData.Success -> {
@@ -58,7 +58,7 @@ class BeerListViewModel @Inject constructor(private val useCase: DataUseCase) : 
                             val response = result.data
 
                             response.let {
-                                _beerList.addAll(response as ArrayList<RepositoriesModelItem>)
+                                _beerList.addAll(response as ArrayList<BeerModelItem>)
                                 _beerListNotifier.postValue(
                                     ListNotifier.NotifyDataChanged
                                 )

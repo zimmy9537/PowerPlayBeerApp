@@ -3,7 +3,7 @@ package com.powerplay.zimmy.powerplaybeerapp.model
 
 import com.google.gson.annotations.SerializedName
 
-data class RepositoriesModelItem(
+data class BeerModelItem(
     @SerializedName("abv")
     val abv: Double,
     @SerializedName("attenuation_level")

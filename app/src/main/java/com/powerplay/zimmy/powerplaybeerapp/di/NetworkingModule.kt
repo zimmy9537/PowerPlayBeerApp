@@ -1,6 +1,6 @@
 package com.powerplay.zimmy.powerplaybeerapp.di
 
-import com.powerplay.zimmy.powerplaybeerapp.network.ApiService
+import com.powerplay.zimmy.powerplaybeerapp.network.BeerApiService
 import com.powerplay.zimmy.powerplaybeerapp.network.NetworkingConstants
 import dagger.Module
 import dagger.Provides
@@ -55,7 +55,7 @@ object NetworkingModule {
     }
 
     @Provides
-    fun provideRestApiService(retrofit: Retrofit): ApiService {
-        return retrofit.create(ApiService::class.java)
+    fun provideRestApiService(retrofit: Retrofit): BeerApiService {
+        return retrofit.create(BeerApiService::class.java)
     }
 }

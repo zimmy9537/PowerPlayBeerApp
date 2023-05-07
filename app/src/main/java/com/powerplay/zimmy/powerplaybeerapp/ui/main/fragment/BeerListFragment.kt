@@ -1,7 +1,6 @@
 package com.powerplay.zimmy.powerplaybeerapp.ui.main.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.powerplay.zimmy.powerplaybeerapp.R
 import com.powerplay.zimmy.powerplaybeerapp.databinding.FragmentBeerListBinding
-import com.powerplay.zimmy.powerplaybeerapp.model.RepositoriesModelItem
 import com.powerplay.zimmy.powerplaybeerapp.network.ResultData
 import com.powerplay.zimmy.powerplaybeerapp.ui.main.adapter.BeerListAdapter
 import com.powerplay.zimmy.powerplaybeerapp.util.BeerUtils
@@ -100,10 +98,14 @@ class BeerListFragment : Fragment(), BeerListAdapter.BeerActionListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initUserInterFace()
+        checkNetwork()
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun checkNetwork() {
         if (!BeerUtils.isNetworkAvailable(context)) {
             Toast.makeText(context, "Internet Not Available", Toast.LENGTH_LONG).show()
         }
-        super.onViewCreated(view, savedInstanceState)
     }
 
     private fun initUserInterFace() {
@@ -120,6 +122,7 @@ class BeerListFragment : Fragment(), BeerListAdapter.BeerActionListener {
             refreshFb.setOnClickListener {
                 viewModel.resetLists()
                 viewModel.fetchData()
+                checkNetwork()
             }
         }
     }
